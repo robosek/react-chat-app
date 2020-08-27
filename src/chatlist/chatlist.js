@@ -29,8 +29,9 @@ class ChatListComponent extends Component {
                             chats.map((_chat, _index) => {
                                 const notMe = this.findNotMe(_chat.users, userEmail)
                                 return(
-                                    <div>
-                                    <ListItem onClick={() => this.selectChat(_index)}
+                                    <div key={_index}>
+                                    <ListItem key={_index}
+                                              onClick={() => this.selectChat(_index)}
                                               className={classes.listItem}
                                               selected={selectedChatIndex === _index}
                                               alignItems='flex-start'>
@@ -78,6 +79,7 @@ class ChatListComponent extends Component {
 
     selectChat = (index) => {
         console.log('Selected chat! ', index)
+        this.props.selectChatFn(index)
     }
 
     findNotMe(users, myEmail){

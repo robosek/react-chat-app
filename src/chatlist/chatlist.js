@@ -51,6 +51,14 @@ class ChatListComponent extends Component {
                                                                 }>
     
                                                   </ListItemText>
+                                                  {
+                                                      _chat.receiverHasRead === false && !this.userIsSender(_chat) ?
+                                                      <ListItemIcon>
+                                                          <NotificationImportant className={classes.unreadMessage}></NotificationImportant>
+                                                      </ListItemIcon> 
+                                                      : null
+                                                      
+                                                  }
                                     </ListItem>
                                     <Divider></Divider>
                                     </div>
@@ -89,6 +97,8 @@ class ChatListComponent extends Component {
     getFirstLetter(email){
         return email.split('')[0]
     }
+
+    userIsSender = (chat) => this.messages[chat.messages.length - 1].sender !== this.props.userEmail
 }
 
 export default withStyles(styles)(ChatListComponent)
